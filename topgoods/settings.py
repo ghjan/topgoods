@@ -15,7 +15,7 @@ SPIDER_MODULES = ['topgoods.spiders']
 NEWSPIDER_MODULE = 'topgoods.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
@@ -45,9 +45,9 @@ ROBOTSTXT_OBEY = False
 #   'Accept-Language': 'en',
 # }
 DEFAULT_REQUEST_HEADERS = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate, sdch',
-    'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
 }
 
 # Enable or disable spider middlewares
@@ -55,14 +55,15 @@ DEFAULT_REQUEST_HEADERS = {
 # SPIDER_MIDDLEWARES = {
 #    'topgoods.middlewares.TopgoodsSpiderMiddleware': 543,
 # }
-DOWNLOADER_MIDDLEWARES = {
-    'topgoods.middlewares.ProxyMiddleware': 90,
-}
+
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
 #    'topgoods.middlewares.MyCustomDownloaderMiddleware': 543,
 # }
+DOWNLOADER_MIDDLEWARES = {
+    'topgoods.middlewares.ProxyMiddleware': 90,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
