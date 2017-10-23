@@ -58,6 +58,7 @@ class TopgoodsSpiderMiddleware(object):
 
 import random
 from topgoods.settings import IPPOOL
+from topgoods.ipadd import IPPOOL_BACKUP
 
 
 class ProxyMiddleware(object):
@@ -65,6 +66,24 @@ class ProxyMiddleware(object):
 
     def process_request(self, request, spider):
         # Set the location of the proxy
-        thisip = random.choice(IPPOOL)
+        if IPPOOL is None:
+            from topgoods.utils.dbhelper import DBHelp
+            sql = "select ip, port, `type` from ips"
+            DBHelp().query(sql, self.after_queryips, request=request)
+        else:
+            self.after_queryips(None, request=request)
+
+    def after_queryips(self, rs, request=None):
+        if rs:
+            for r in rs:
+                url_ = r[2] + '//' + r[0] + ':' + r[1]
+                IPPOOL.append(url_)
+        if not IPPOOL:
+            thisip = 'http://' + random.choice(IPPOOL_BACKUP)
+        else:
+            thisip = random.choice(IPPOOL)
         print("this is ip:" + thisip["ipaddr"])
-        request.meta["proxy"] = "http://" + thisip["ipaddr"]
+        if request:
+            request.meta["proxy"] = thisip["ipaddr"]
+        else:
+            print("Exception, request is None?!!!")
