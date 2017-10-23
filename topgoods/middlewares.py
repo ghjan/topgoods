@@ -77,7 +77,7 @@ class ProxyMiddleware(object):
         if rs:
             for r in rs:
                 try:
-                    url_ = r['type'] + '//' + r['ip'] + ':' + r['port']
+                    url_ = r['type'].decode('utf-8') + '//' + r['ip'].decode('utf-8') + ':' + r['port'].decode('utf-8')
                     IPPOOL.append(url_)
                 except Exception as e:
                     print("r:{}".format(r))
