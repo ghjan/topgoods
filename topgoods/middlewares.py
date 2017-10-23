@@ -59,6 +59,7 @@ class TopgoodsSpiderMiddleware(object):
 import random
 from topgoods.settings import IPPOOL
 from topgoods.ipadd import IPPOOL_BACKUP
+from topgoods.utils.dbhelper import DBHelp
 
 
 class ProxyMiddleware(object):
@@ -67,19 +68,19 @@ class ProxyMiddleware(object):
     def process_request(self, request, spider):
         # Set the location of the proxy
         if IPPOOL is None:
-            from topgoods.utils.dbhelper import DBHelp
             sql = "select ip, port, `type` from ips"
             DBHelp().query(sql, self.after_queryips, request=request)
         else:
             self.after_queryips(None, request=request)
 
     def after_queryips(self, rs, request=None):
+        from topgoods.settings import IPPOOL
         if rs:
+            if IPPOOL is None:
+                IPPOOL = []
             for r in rs:
                 try:
                     url_ = r['type'].decode('utf-8') + '//' + r['ip'].decode('utf-8') + ':' + r['port'].decode('utf-8')
-                    if IPPOOL is None:
-                        IPPOOL = []
                     IPPOOL.append(url_)
                 except Exception as e:
                     print("r:{}".format(r))
