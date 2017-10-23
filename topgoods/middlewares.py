@@ -86,9 +86,9 @@ class ProxyMiddleware(object):
                     print("r:{}".format(r))
                     print(e)
         if not IPPOOL:
-            thisip = 'http://' + random.choice(IPPOOL_BACKUP)
+            thisip = 'http://' + random.choice(IPPOOL_BACKUP)["ipaddr"]
         else:
-            thisip = random.choice(IPPOOL)["ipaddr"]
+            thisip = random.choice(IPPOOL)
         print("this is ip:" + thisip)
         if request:
             request.meta["proxy"] = thisip
