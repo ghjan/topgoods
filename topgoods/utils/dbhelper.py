@@ -13,8 +13,6 @@ except:  # py2
 
 from twisted.enterprise import adbapi
 
-dbpool = adbapi.ConnectionPool("MySQLdb", 'mydb', 'andrew', 'password')
-
 
 class DBHelp(object):
     def __init__(self):

@@ -76,8 +76,12 @@ class ProxyMiddleware(object):
     def after_queryips(self, rs, request=None):
         if rs:
             for r in rs:
-                url_ = r[2] + '//' + r[0] + ':' + r[1]
-                IPPOOL.append(url_)
+                try:
+                    url_ = r[2] + '//' + r[0] + ':' + r[1]
+                    IPPOOL.append(url_)
+                except Exception as e:
+                    print("r:{}".format(r))
+                    print(e)
         if not IPPOOL:
             thisip = 'http://' + random.choice(IPPOOL_BACKUP)
         else:
