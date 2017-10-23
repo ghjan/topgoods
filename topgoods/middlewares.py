@@ -88,9 +88,9 @@ class ProxyMiddleware(object):
         if not IPPOOL:
             thisip = 'http://' + random.choice(IPPOOL_BACKUP)
         else:
-            thisip = random.choice(IPPOOL)
-        print("this is ip:" + thisip["ipaddr"])
+            thisip = random.choice(IPPOOL)["ipaddr"]
+        print("this is ip:" + thisip)
         if request:
-            request.meta["proxy"] = thisip["ipaddr"]
+            request.meta["proxy"] = thisip
         else:
             print("Exception, request is None?!!!")
