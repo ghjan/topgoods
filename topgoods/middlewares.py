@@ -95,3 +95,26 @@ class ProxyMiddleware(object):
             request['request'].meta["proxy"] = thisip
         else:
             print("Exception, request is None?!!!")
+
+
+from .settings import USER_AGENT_MAPPING
+
+
+class RandomUserAgent(object):
+    def __init__(self, agents):
+        self.agents = agents
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # load USER_AGENTS from settings
+        return cls(crawler.settings.getlist('USER_AGENTS'))
+
+    # overwrite process request
+    def process_request(self, request, spider):
+        # set User-Agent
+        request.headers.setdefault('User-Agent', self._build_request_user_agent())
+
+    def _build_request_user_agent(self, pc_only=False):
+        """构建随机的模拟用户浏览器user agent"""
+        usage = random.randint(0, 2) if pc_only else random.randint(0, 4)
+        return USER_AGENT_MAPPING[usage]
