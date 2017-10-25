@@ -82,7 +82,7 @@ DEFAULT_REQUEST_HEADERS = {
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'topgoods.middlewares.ProxyMiddleware': 90,
-    'tutorial.middlewares.RandomUserAgent': 490,
+    'topgoods.middlewares.RandomUserAgent': 490,
 }
 
 # Enable or disable extensions
