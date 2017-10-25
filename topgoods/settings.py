@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for topgoods project
@@ -133,3 +134,5 @@ IPPOOL = None
 # Output .csv
 FEED_URI = u'goods.csv'
 FEED_FORMAT = 'CSV'
+
+HTTPERROR_ALLOWED_CODES = [302, ]
