@@ -15,6 +15,8 @@ BOT_NAME = 'topgoods'
 SPIDER_MODULES = ['topgoods.spiders']
 NEWSPIDER_MODULE = 'topgoods.spiders'
 
+DEPTH_LIMIT = 2
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0"
 
@@ -60,14 +62,13 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 4
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 CONCURRENT_REQUESTS_PER_IP = 4
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = True
-COOKIES_DEBUG = True
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
@@ -128,3 +129,7 @@ MYSQL_PASSWD = 'DavidZhang=123456'  # 数据库密码，请修改
 MYSQL_PORT = 3306  # 数据库端口，在dbhelper中使用
 
 IPPOOL = None
+
+# Output .csv
+FEED_URI = u'goods.csv'
+FEED_FORMAT = 'CSV'
