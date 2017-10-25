@@ -66,6 +66,7 @@ class ProxyMiddleware(object):
     # overwrite process request
 
     def process_request(self, request, spider):
+        print("type of request:{}".format(request))
         # Set the location of the proxy
         if IPPOOL is None:
             sql = "select ip, port, `type` from ips"
@@ -91,6 +92,6 @@ class ProxyMiddleware(object):
             thisip = random.choice(IPPOOL)
         print("this is ip:" + thisip)
         if request:
-            request.meta["proxy"] = thisip
+            request['request'].meta["proxy"] = thisip
         else:
             print("Exception, request is None?!!!")
